@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.smarttech.helpme"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Location
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    // Scheduled Tasks
+    implementation "androidx.work:work-runtime:2.2.0"
+    implementation "androidx.work:work-rxjava2:2.2.0"
+
+    // UI
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    // Reactive
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+
+    // WEB API
+    implementation 'com.auth0.android:jwtdecode:1.1.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
+    // Reactive retrofit
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
+
+    // Firebase core
+    implementation 'com.google.firebase:firebase-core:17.2.0'
+
+    // Crashlytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+
+    // Maps
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+
+    // Local unit tests
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.7.1'
+    testAnnotationProcessor 'com.google.dagger:dagger-compiler:2.8'
+
+    // UI Testing
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation 'org.mockito:mockito-core:2.7.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.8'
+    implementation 'org.jetbrains:annotations-java5:15.0'
+}

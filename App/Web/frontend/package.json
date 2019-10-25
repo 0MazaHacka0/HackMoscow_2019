@@ -3,10 +3,12 @@
 	"dependencies": {
 		"express": "latest",
 		"cookie-parser": "latest",
-		"mysql2": "latest",
+		"mysql": "latest",
 		"mysql-utilities": "latest",
 		"express-session": "latest",
 		"express-mysql-session": "latest",
-		"socket.io": "latest"
+		"socket.io": "latest",
+		"js-md5": "latest",
+		"ejs": "latest"
 	}
 }

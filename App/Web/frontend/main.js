@@ -7,7 +7,7 @@ var express = require('express')
 	, io = require('socket.io').listen(http)
 	;
 
-let con = require('mysql2').createConnection({user: "moscow", password: "moscow", database: "moscow", charset: "utf8mb4"});
+let con = require('mysql').createConnection({user: "moscow", password: "moscow", database: "moscow", charset: "utf8mb4"});
 con.on('error', (err) => {console.warn(err)});
 con.connect((err) => {if (err) return console.error('error connecting: ' + err.stack); console.log('mysql for / as id ' + con.threadId);});
 let util = require('mysql-utilities');
@@ -20,7 +20,7 @@ app.use(express.static('public'));
 session = session({secret: "u9hf2huwh29", store: new MySQLStore({expiration: 604800000}, con), resave: false, saveUninitialized: false, name: 'sid', cookie: {maxAge: 604800000}});
 
 io.use((socket, next) => {session(socket.request, socket.request.res, next)});
-try {require('./io')(io, con)} catch (e) {console.warn(e)}
+// try {require('./io')(io, con)} catch (e) {console.warn(e)}
 
 app.use(express.urlencoded({ extended: true })).use(express.json()).use(require('cookie-parser')())
 .use(session)

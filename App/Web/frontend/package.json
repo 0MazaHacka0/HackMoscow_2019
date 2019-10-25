@@ -4,6 +4,9 @@
 		"express": "latest",
 		"cookie-parser": "latest",
 		"mysql2": "latest",
-		"mysql-utilities": "latest"
+		"mysql-utilities": "latest",
+		"express-session": "latest",
+		"express-mysql-session": "latest",
+		"socket.io": "latest"
 	}
 }

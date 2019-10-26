@@ -42,37 +42,37 @@ public class RegisterRequest extends CommonRequest {
      * Last name
      */
     @SerializedName("last_name")
-    String mLastName;
+    private String mLastName;
 
     /**
      * Name
      */
     @SerializedName("name")
-    String mName;
+    private String mName;
 
     /**
      * Second name
      */
     @SerializedName("second_name")
-    String mSecondName;
+    private String mSecondName;
 
     /**
      * Birthday
      */
     @SerializedName("birthday")
-    Date mBirthday;
+    private Date mBirthday;
 
     /**
      * Email
      */
     @SerializedName("email")
-    String mEmail;
+    private String mEmail;
 
     /**
      * Phone
      */
     @SerializedName("phone")
-    String mPhone;
+    private String mPhone;
 
     /**
      * Register request

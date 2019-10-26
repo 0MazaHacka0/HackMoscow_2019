@@ -40,6 +40,6 @@ class CommonRequest {
      * Auth token
      */
     @SerializedName("token")
-    String mAuthToken;
+    protected String mAuthToken;
 
 }

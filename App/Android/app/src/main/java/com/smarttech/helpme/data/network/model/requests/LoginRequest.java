@@ -40,13 +40,13 @@ public class LoginRequest extends CommonRequest {
      * Login
      */
     @SerializedName("login")
-    String mLogin;
+    private String mLogin;
 
     /**
      * Password
      */
     @SerializedName("password")
-    String mPassword;
+    private String mPassword;
 
     /**
      * Login request

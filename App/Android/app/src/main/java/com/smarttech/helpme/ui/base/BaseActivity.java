@@ -25,6 +25,8 @@
 package com.smarttech.helpme.ui.base;
 
 
+import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * BaseActivity
  *
@@ -33,6 +35,8 @@ package com.smarttech.helpme.ui.base;
  * @subpackage None
  * @author     Dmitry Abakumov <killerinshadow2@gmail.com>
  */
-public class BaseActivity {
+public class BaseActivity extends AppCompatActivity {
+
+
 
 }

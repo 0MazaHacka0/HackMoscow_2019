@@ -124,8 +124,8 @@ public class Permissions {
 
         // Request permissions
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.requestPermissions(requestedPermissions.toArray(new String[0]),
-                    requestPermissionsCode);
+//            activity.requestPermissions(requestedPermissions.toArray(new String[0]),
+//                    requestPermissionsCode);
         }
 
     }

@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+
+    <!-- Application -->
+    <color name="colorWindowBackground">#F9090A</color>
+
+    <color name="colorPrimary">#F9090A</color>
+    <color name="colorPrimaryDark">#A00606</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!-- Main activity -->
+
 </resources>

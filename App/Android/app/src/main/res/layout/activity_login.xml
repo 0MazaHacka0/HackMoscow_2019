@@ -8,11 +8,10 @@
 
     <ImageView
         android:id="@+id/logo"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/LoginScreen.Logo"
         android:layout_above="@id/center"
         android:layout_centerHorizontal="true"
+        android:contentDescription="@string/login_screen_logo_describe"
         android:src="@drawable/logo_text" />
 
     <Space
@@ -23,43 +22,28 @@
 
     <EditText
         android:id="@+id/login_field"
-        android:backgroundTint="#FFFFFF"
-        android:hint="Email"
-        android:textColor="#FFFFFF"
+        style="@style/LoginScreen.Field"
         android:layout_below="@id/center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:hint="@string/login_screen_login" />
 
     <EditText
-        android:inputType="textPassword"
         android:id="@+id/password_field"
-        android:backgroundTint="#FFFFFF"
-        android:hint="Password"
-        android:textColor="#FFFFFF"
+        style="@style/LoginScreen.Field"
         android:layout_below="@id/login_field"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:hint="@string/login_screen_password"
+        android:inputType="textPassword" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:layout_below="@id/password_field"
-        android:text="Sign in"
         android:id="@+id/login_button"
-        android:layout_marginHorizontal="5dp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        style="@style/LoginScreen.Button"
+        android:layout_below="@id/password_field"
+        android:text="@string/login_screen_login_button" />
 
     <TextView
+        style="@style/LoginScreen.SignUp"
         android:id="@+id/sign_up_text"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/login_button"
-        android:text="Don't have account yet? Sign up"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_below="@id/login_button"
-        android:layout_toRightOf="@id/sign_up_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="@string/login_screen_sign_up_text" />
 
 </RelativeLayout>

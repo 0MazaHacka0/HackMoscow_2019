@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Base colours -->
+    <color name="white">#FFF</color>
+
     <!-- Application -->
-    <color name="colorWindowBackground">#F9090A</color>
+    <color name="colorWindowBackground">#FFFFFF</color>
 
     <color name="colorPrimary">#F9090A</color>
     <color name="colorPrimaryDark">#A00606</color>

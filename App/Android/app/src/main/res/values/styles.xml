@@ -20,4 +20,42 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!-- Login screen -->
+    <style name="LoginScreen"></style>
+    <!-- Logo -->
+    <style name="LoginScreen.Logo">
+        <item name="android:layout_marginStart">@dimen/logo_screen_logo_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/logo_screen_logo_margin_horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- Login fields -->
+    <style name="LoginScreen.Field">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/logo_screen_field_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/logo_screen_field_margin_horizontal</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+    </style>
+
+    <!-- Login button -->
+    <style name="LoginScreen.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/logo_screen_login_button_margin_top</item>
+        <item name="android:layout_marginStart">@dimen/logo_screen_login_button_margin_horizontal</item>
+        <item name="android:layout_marginEnd">@dimen/logo_screen_login_button_margin_horizontal</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Login sign up text -->
+    <style name="LoginScreen.SignUp">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/logo_screen_sign_up_text_margin_top</item>
+    </style>
+
 </resources>

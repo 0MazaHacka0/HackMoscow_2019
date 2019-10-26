@@ -40,13 +40,13 @@ public class LoginResponse extends CommonResponse {
      * Auth token
      */
     @SerializedName("auth_token")
-    String mAuthToken;
+    private String mAuthToken;
 
     /**
      * Name
      */
     @SerializedName("name")
-    String mName;
+    private String mName;
 
     /**
      * Login response

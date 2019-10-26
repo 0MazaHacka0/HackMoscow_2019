@@ -40,12 +40,12 @@ class CommonResponse {
      * Status code
      */
     @SerializedName("code")
-    Integer mCode;
+    protected Integer mCode;
 
     /**
      * Status message
      */
     @SerializedName("message")
-    String mMessage;
+    protected String mMessage;
 
 }

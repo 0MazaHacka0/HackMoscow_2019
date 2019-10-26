@@ -24,8 +24,9 @@
  */
 package com.smarttech.helpme.data.hardware;
 
-import android.app.Activity;
 import android.content.Context;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.smarttech.helpme.data.hardware.model.Location;
 import com.smarttech.helpme.data.hardware.model.Permissions;
@@ -102,7 +103,7 @@ public class AppHardwareHelper implements HardwareHelper {
      *
      * @param activity activity where show dialog
      */
-    public void requestPermissions(Activity activity) {
+    public void requestPermissions(AppCompatActivity activity) {
         mPermissions.requestPermissions(activity);
     }
 

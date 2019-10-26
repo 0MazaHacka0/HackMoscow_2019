@@ -25,9 +25,12 @@
 package com.smarttech.helpme.data.hardware.model;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.location.LocationRequest;
 import com.smarttech.helpme.utils.AppConstants;
@@ -97,6 +100,8 @@ public class Location {
      */
     public Location(Context context) {
         mContext = context;
+        setupLocationManager();
+        setupLocationRequest();
     }
 
     /**

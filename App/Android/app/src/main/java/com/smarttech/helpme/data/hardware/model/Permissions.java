@@ -25,11 +25,15 @@
 package com.smarttech.helpme.data.hardware.model;
 
 import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * App hardware helper
@@ -51,7 +55,9 @@ public class Permissions {
      */
     public static final int PERMISSION_ACCESS_BACKGROUND_LOCATION_REQUEST_CODE = 2;
 
-    /** @var mContext Context context **/
+    /**
+     * Context
+     */
     private Context mContext;
 
     /**
@@ -96,15 +102,16 @@ public class Permissions {
      *
      * @param activity activity where show dialog
      */
-    public void requestPermissions(Activity activity) {
+    public void requestPermissions(AppCompatActivity activity) {
+
+        int requestPermissionsCode = PERMISSION_ACCESS_COARSE_LOCATION_REQUEST_CODE;
+        List<String> requestedPermissions = new ArrayList<>();
 
         // App doesn't have access to the device's location at all. Make full request
         // for permission
         if (!permissionAccessCoarseLocationApproved) {
-            ActivityCompat.requestPermissions(activity, new String[] {
-                    Manifest.permission.ACCESS_COARSE_LOCATION,
-                    Manifest.permission.ACCESS_BACKGROUND_LOCATION
-            }, PERMISSION_ACCESS_COARSE_LOCATION_REQUEST_CODE);
+            requestedPermissions.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+            requestedPermissions.add(Manifest.permission.ACCESS_BACKGROUND_LOCATION);
         }
 
         // App can only access location in the foreground. Display a dialog
@@ -112,10 +119,15 @@ public class Permissions {
         // location in order to function properly. Then, request background
         // location
         if (!backgroundLocationPermissionApproved) {
-            ActivityCompat.requestPermissions(activity, new String[] {
-                            Manifest.permission.ACCESS_BACKGROUND_LOCATION},
-                    PERMISSION_ACCESS_BACKGROUND_LOCATION_REQUEST_CODE);
+            requestPermissionsCode = PERMISSION_ACCESS_BACKGROUND_LOCATION_REQUEST_CODE;
         }
+
+        // Request permissions
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.requestPermissions(requestedPermissions.toArray(new String[0]),
+                    requestPermissionsCode);
+        }
+
     }
 
 }

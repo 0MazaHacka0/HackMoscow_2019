@@ -25,8 +25,9 @@
 package com.smarttech.helpme.data.hardware;
 
 
-import android.app.Activity;
 import android.location.Location;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import io.reactivex.Observable;
 
@@ -52,7 +53,7 @@ public interface HardwareHelper {
      *
      * @param activity activity where show dialog
      */
-    void requestPermissions(Activity activity);
+    void requestPermissions(AppCompatActivity activity);
 
     /**
      * Get location observable

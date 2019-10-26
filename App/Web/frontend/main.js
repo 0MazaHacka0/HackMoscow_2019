@@ -14,6 +14,10 @@ let util = require('mysql-utilities');
 util.upgrade(con);
 util.introspection(con);
 
+con.userLib = {};
+con.userLib.promise = require('./promise');
+con.userLib.md5 = require('js-md5');
+
 app.set("view engine", "ejs");
 app.use(express.static('public'));
 

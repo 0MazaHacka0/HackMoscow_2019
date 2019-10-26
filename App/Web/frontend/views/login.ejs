@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<%- include('head') %>
+</head>
+<body>
+	<h1>Страница входа. Ну входите, я вас не буду отвлекать.</h1>
+	<form action="" method="POST">
+		<input name="login" type="text">
+		<input name="password" type="password">
+		<button name="butt" type="submit">Войти</button>
+	</form>
+	<% if (user.logErr) { %> <span>Неправильный логин или пароль!</span> <% } %>
+</body>
+</html>

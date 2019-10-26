@@ -1,8 +1,15 @@
 module.exports.func = (con, req, res) => {
+
+	if (!req.session.uID) {
+		res.redirect('/');
+		return;
+	}
+
 	res.render('map', {
-		title:"MTS карта",
-		isLogin:req.session.refresh_token ? true : false,
+		title:"Карта",
+		isLogin:req.session.uID ? true : false,
 		user: req.session
 	});
+	
 };
-module.exports.path = '/';
+module.exports.path = '/map';

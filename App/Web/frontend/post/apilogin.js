@@ -1,22 +1,15 @@
 module.exports.func = async (con, req, res) => {
+	console.log(req.body);
 
 	if (!req.body) {
-		res.redirect('/login');
+		res.json({error: "NoBodyData"});
 		return;
 	}
 
 	let login = await con.userLib.promise(con, con.queryValue, 'SELECT id FROM users WHERE login = ? AND password = ?', [req.body.login, con.userLib.md5(req.body.password)]);
 	login = login.res;
 
-	if (!login) {
-		req.session.logErr = 1;
-		res.redirect('/login');
-		return;
-	}
-
-	delete req.session.logErr
-	req.session.uID = login;
-	res.redirect('/map');
+	res.json(login ? {id: login} : {error: "NoUserFound"})
 };
 
-module.exports.path = '/login';
+module.exports.path = '/api/login';

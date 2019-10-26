@@ -24,7 +24,7 @@ app.use(express.static('public'));
 session = session({secret: "u9hf2huwh29", store: new MySQLStore({expiration: 604800000}, con), resave: false, saveUninitialized: false, name: 'sid', cookie: {maxAge: 604800000}});
 
 io.use((socket, next) => {session(socket.request, socket.request.res, next)});
-// try {require('./io')(io, con)} catch (e) {console.warn(e)}
+try {require('./io')(io, con)} catch (e) {console.warn(e)}
 
 app.use(express.urlencoded({ extended: true })).use(express.json()).use(require('cookie-parser')())
 .use(session)

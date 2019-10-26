@@ -1,63 +1,63 @@
 let Ma = {
-	 'Init' : {
-		 app_id:   'BTHrIHz6qnrDm7zBkR7l',
-		 app_code: 'iYejqpbyyoaPkfGvkYYH0A',
-		 useHTTPS: true
-	 },
-	 'Behavior' :    {},       // Управление событиями карты
-	 'Container' :   {},       // Контейнер для отображения карты
-	 'PlacesService':{},       // Сервис Places API
-	 'PlacesGroup':  {},       // Группа для хранения точек интереса
-	 'Lat' :         55.815214,// Широта (центр карты)
-	 'Lng' :         37.574802,// Долгота (центр карты)
-	 'Layers' :      {},       // Список картографических основ
-	 'Map' :         {},       // Объект карты
-	 'Platform' :    {},       // Платформа HERE API
-	 'UI' :          {},       // Пользовательский интерфейс
-	 'Zoom' :        15        // 1 == весь мир, 15 == масштаб улицы
+   'Init' : {
+     app_id:   'BTHrIHz6qnrDm7zBkR7l',
+     app_code: 'iYejqpbyyoaPkfGvkYYH0A',
+     useHTTPS: true
+   },
+   'Behavior' :    {},       // Управление событиями карты
+   'Container' :   {},       // Контейнер для отображения карты
+   'PlacesService':{},       // Сервис Places API
+   'PlacesGroup':  {},       // Группа для хранения точек интереса
+   'Lat' :         55.815214,// Широта (центр карты)
+   'Lng' :         37.574802,// Долгота (центр карты)
+   'Layers' :      {},       // Список картографических основ
+   'Map' :         {},       // Объект карты
+   'Platform' :    {},       // Платформа HERE API
+   'UI' :          {},       // Пользовательский интерфейс
+   'Zoom' :        17        // 1 == весь мир, 15 == масштаб улицы
 };
 
 
 // Контейнер для отображения карты
 Ma.Container = document.querySelector('#map')
-	
+  
 // Инициализация платформы
 Ma.Platform = new H.service.Platform(Ma.Init)
-	
+  
 // Получение доступа к сервису Places API
 Ma.PlacesService = Ma.Platform.getPlacesService()
 
 // Создание группы для хранения результатов запроса Places API
 Ma.PlacesGroup = new H.map.Group()
-	
+  
 // Список картографических основ
 Ma.Layers = Ma.Platform.createDefaultLayers({lg:'rus'})
 
 // Создание объекта карты 
 Ma.Map = new H.Map(Ma.Container, Ma.Layers.normal.map)
-	
+  
 // Добавление интерактивности
 Ma.Behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(Ma.Map))
-	
+  
 // Пользовательский интерфейс
 Ma.UI = H.ui.UI.createDefault(Ma.Map, Ma.Layers)
 
 // Обработчик изменения размеров окна браузера
 window.addEventListener('resize', () => {
-	Ma.Map.getViewPort().resize()
+  Ma.Map.getViewPort().resize()
 })
 
 // Функция для отображения карты
 function displayMap () {
-		
-		// Центр карты
-		Ma.Map.setCenter({lat: Ma.Lat, lng: Ma.Lng})
-		
-		// Масштаб 2 - весь мир, 17 - уровень улицы
-		Ma.Map.setZoom(Ma.Zoom)
+    
+    // Центр карты
+    Ma.Map.setCenter({lat: Ma.Lat, lng: Ma.Lng})
+    
+    // Масштаб 2 - весь мир, 17 - уровень улицы
+    Ma.Map.setZoom(Ma.Zoom)
 
-		// Группа для хранения маркеров
-		Ma.Map.addObject(Ma.PlacesGroup)
+    // Группа для хранения маркеров
+    Ma.Map.addObject(Ma.PlacesGroup)
 }
 
 // Вызов функции для инициализации карты
@@ -122,75 +122,76 @@ G.ShowError = error =>{
 // Запуск трекинга местоположения
 G.StartTrackPosition()
 
-// var polyline, group, from, to;
+var polyline, group, from, to;
 
-// function calculateRouteFromAtoB (type = 'self', train = 0) {
-//   var router = Ma.Platform.getRoutingService(),
-//     routeRequestParams = {
-//       mode: type == 'self' ? 'shortest;car' : 'shortest;publicTransport',
-//       representation: 'display',
-//       routeattributes : 'waypoints,summary,shape,legs',
-//       maneuverattributes: 'direction,action',
-//       waypoint0: type == 'self' ? from.lat+','+from.lng : trains[train].st1,
-//       waypoint1: type == 'self' ? to.lat+','+to.lng : trains[train].st2
-//     };
+function calculateRouteFromAtoB (way, type = 0) {
+  var router = Ma.Platform.getRoutingService(),
+    routeRequestParams = {
+      mode: type ? 'shortest;car' : 'shortest;publicTransport',
+      representation: 'display',
+      routeattributes : 'waypoints,summary,shape,legs',
+      maneuverattributes: 'direction,action'
+    };
 
-//   router.calculateRoute(
-//     routeRequestParams,
-//     onSuccess,
-//     onError
-//   );
-// }
+  for (var i in way) {
+    routeRequestParams['waypoint'+i] = way[i].lat+","+way[i].lng;
+  }
 
-// function onSuccess(result) {
-// 	console.log(result);
-//   var route = result.response.route[0];
-//   if (polyline) Ma.Map.removeObject(polyline); 
-//   addRouteShapeToMap(route);
-//   if (group) Ma.Map.removeObject(group);
-//   addManueversToMap(route);
-// }
+  router.calculateRoute(
+    routeRequestParams,
+    onSuccess,
+    onError
+  );
+}
 
-// function onError(error) {
-//   alert('Ooops!');
-// }
+function onSuccess(result) {
+  var route = result.response.route[0];
+  if (polyline) Ma.Map.removeObject(polyline); 
+  addRouteShapeToMap(route);
+  // if (group) Ma.Map.removeObject(group);
+  // addManueversToMap(route);
+}
 
-// var bubble;
+function onError(error) {
+  alert('Ooops!');
+}
 
-// function openBubble(position, text){
-//  if(!bubble){
-//     bubble =  new H.ui.InfoBubble(
-//       position,
-//       // The FO property holds the province name.
-//       {content: text});
-//     Ma.UI.addBubble(bubble);
-//   } else {
-//     bubble.setPosition(position);
-//     bubble.setContent(text);
-//     bubble.open();
-//   }
-// }
+var bubble;
 
-// function addRouteShapeToMap(route){
-//   var lineString = new H.geo.LineString(),
-//     routeShape = route.shape;
+function openBubble(position, text){
+  if(!bubble){
+    bubble = new H.ui.InfoBubble(
+      position,
+      // The FO property holds the province name.
+      {content: text});
+    Ma.UI.addBubble(bubble);
+  } else {
+    bubble.setPosition(position);
+    bubble.setContent(text);
+    bubble.open();
+  }
+}
 
-//   routeShape.forEach(function(point) {
-//     var parts = point.split(',');
-//     lineString.pushLatLngAlt(parts[0], parts[1]);
-//   });
+function addRouteShapeToMap(route){
+  var lineString = new H.geo.LineString(),
+    routeShape = route.shape;
 
-//   polyline = new H.map.Polyline(lineString, {
-//     style: {
-//       lineWidth: 4,
-//       strokeColor: 'rgba(0, 128, 255, 0.7)'
-//     }
-//   });
-//   // Add the polyline to the map
-//   Ma.Map.addObject(polyline);
-//   // And zoom to its bounding rectangle
-//   Ma.Map.setViewBounds(polyline.getBounds(), true);
-// }
+  routeShape.forEach(function(point) {
+    var parts = point.split(',');
+    lineString.pushLatLngAlt(parts[0], parts[1]);
+  });
+
+  polyline = new H.map.Polyline(lineString, {
+    style: {
+      lineWidth: 4,
+      strokeColor: 'rgba(0, 128, 255, 0.7)'
+    }
+  });
+  // Add the polyline to the map
+  Ma.Map.addObject(polyline);
+  // And zoom to its bounding rectangle
+  // Ma.Map.setViewBounds(polyline.getBounds(), true);
+}
 
 // function addManueversToMap(route){
 //   var svgMarkup = '<svg width="18" height="18" ' +
@@ -254,67 +255,48 @@ G.StartTrackPosition()
 //   M.updateTextFields();
 // }
 
-// Ma.Map.addEventListener('contextmenu', function (e) {
+$('#clearMap').on('click', function() {
+  let obj = Ma.Map.getObjects().filter(el => el.Ob.src.B);
+  Ma.Map.removeObjects(obj);
+  Ma.Map.removeObject(polyline); 
+  polyline = 0;
+});
 
-// 	if (e.target !== Ma.Map) {
-//     return;
-//   }
+var socket = io();
 
-// 	var coord = Ma.Map.screenToGeo(e.viewportX, e.viewportY);
+let openCsv = function(e){
+  var reader = new FileReader();
+  reader.onload = function(){
+    socket.emit('sendCsv', reader.result);
+  };
+  reader.readAsText(e.target.files[0]);
+};
 
-// 	e.items.push(
-//     new H.util.ContextItem({
-//       label: 'From Here',
-//       callback: function() {
-//       	from = coord;
-//       	if (to) calculateRouteFromAtoB('self');
-//       	reverseGeocode(from.lat, from.lng, 'from');
-//       }
-//     }),
-//     H.util.ContextItem.SEPARATOR,
-//     new H.util.ContextItem({
-//       label: 'To here',
-//       callback: function() {
-//         to = coord;
-//         if (from) calculateRouteFromAtoB('self');
-//         reverseGeocode(to.lat, to.lng, 'to');
-//       }
-//     })
-//   );
-// });
+socket.emit('getData');
 
-// $('#selectTrain').on('change', function(e) {
-// 	calculateRouteFromAtoB('train', e.currentTarget.value);
-// 	reverseGeocode(trains[e.currentTarget.value].st1.split(',')[0], trains[e.currentTarget.value].st1.split(',')[1], 'from');
-// 	reverseGeocode(trains[e.currentTarget.value].st2.split(',')[0], trains[e.currentTarget.value].st2.split(',')[1], 'to');
-// });
+setInterval(() => { if (onlineData.checked) {socket.emit('getData')} }, 5 * 1000);
 
+socket.on('recData', (data) => {
+  console.log('update');
+  Ma.Map.removeObjects(Ma.Map.getObjects().filter(el => el.Ob.src.B));
+  for (var i of data) {
+    // console.log(i);
+    let circle = new H.map.Circle(
+      {lat: i.lat, lng: i.lng}, i.radius,
+      {style: {lineWidth: 0, fillColor: 'rgba(0, 128, 0, 0.7)'}}
+    );
 
+    circle.instruction = i.time;
 
+    circle.addEventListener('tap', function (evt) {
+      // Ma.Map.setCenter(evt.target.getCenter());
+      openBubble(evt.target.getCenter(), evt.target.instruction+'s');
+    }, false);
 
+    Ma.Map.addObject(circle);
+  }
 
-// var socket = io();
+  calculateRouteFromAtoB( Ma.Map.getObjects().filter(el => el.Ob.src.B).map(el => el.getCenter()) );
 
-// $('#filterOperator').on('change', function(e) {
-// 	console.log(e.currentTarget.value);
-// 	socket.emit('getData', {operator: e.currentTarget.value})
-// });
-
-// socket.emit('getData');
-
-// setInterval(() => {socket.emit('getData', {operator: filterOperator.value})}, 5 * 1000);
-
-// socket.on('recData', (data) => {
-// 	console.log('update');
-// 	let obj = Ma.Map.getObjects().filter(el => el.Ob.src.B);
-// 	Ma.Map.removeObjects(obj);
-// 	for (var i of data) {
-// 		// console.log(i);
-// 		Ma.Map.addObject(new H.map.Circle(
-// 			{lat: i.lat, lng: i.lng}, 25,
-// 			{style: {lineWidth: 0, fillColor: 'rgba(0, 128, 0, 0.7)'}}
-// 		));
-// 	}
-
-// 	// M.Map.setViewBounds(M.PlacesGroup.getBounds());
-// })
+  // M.Map.setViewBounds(M.PlacesGroup.getBounds());
+});

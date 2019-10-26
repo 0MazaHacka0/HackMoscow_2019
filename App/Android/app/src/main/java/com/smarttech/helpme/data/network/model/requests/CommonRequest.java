@@ -42,4 +42,10 @@ class CommonRequest {
     @SerializedName("token")
     protected String mAuthToken;
 
+    /**
+     * UID
+     */
+    @SerializedName("uid")
+    protected Integer mUid;
+
 }

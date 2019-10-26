@@ -40,13 +40,13 @@ public class Location {
      * Lat
      */
     @SerializedName("lat")
-    private String mLat;
+    private Double mLat;
 
     /**
      * Long
      */
     @SerializedName("lng")
-    private String mLng;
+    private Double mLng;
 
     /**
      * Radius
@@ -61,7 +61,7 @@ public class Location {
      * @param lng    long
      * @param radius radius
      */
-    public Location(String lat, String lng, Double radius) {
+    public Location(Double lat, Double lng, Double radius) {
         mLat = lat;
         mLng = lng;
         mRadius = radius;

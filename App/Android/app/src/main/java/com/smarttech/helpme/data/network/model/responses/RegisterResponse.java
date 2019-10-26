@@ -54,7 +54,9 @@ public class RegisterResponse extends CommonResponse {
      * @param authToken auth token
      * @param name      name
      */
-    public RegisterResponse(String authToken, String name) {
+    public RegisterResponse(Integer code, String message, String authToken, String name) {
+        super(code, message);
+
         mAuthToken = authToken;
         mName = name;
     }

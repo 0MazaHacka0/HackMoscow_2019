@@ -16,47 +16,43 @@
  * please refer to https://github.com/0MazaHacka0/HackMoscow_2019
  * for more information.
  *
- * @category   data
- * @package    network
- * @subpackage model
+ * @category   UI
+ * @package    Base
+ * @subpackage None
  * @copyright  Copyright (C) 2019 Project HelpMe (https://github.com/0MazaHacka0/HackMoscow_2019)
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-package com.smarttech.helpme.data.network.model.responses;
+package com.smarttech.helpme.data.network.model.requests;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.smarttech.helpme.data.network.model.Location;
 
 /**
- * API common response model
+ * API model interface
  *
  * @category   Data
  * @package    Network
  * @subpackage Model
  * @author     Dmitry Abakumov <killerinshadow2@gmail.com>
  */
-public class CommonResponse {
+public class PointRequest extends CommonRequest {
 
     /**
-     * Status code
+     * Location
      */
-    @SerializedName("code")
-    protected Integer mCode;
+    @Expose
+    @SerializedName("location")
+    private Location mLocation;
 
     /**
-     * Status message
-     */
-    @SerializedName("message")
-    protected String mMessage;
-
-    /**
-     * Common response model constructor
+     * PointRequest model constructor
      *
-     * @param code    status code
-     * @param message message
+     * @param location location
      */
-    public CommonResponse(Integer code, String message) {
-        mCode = code;
-        mMessage = message;
+    public PointRequest(Integer uid, Location location) {
+        mUid = uid;
+        mLocation = location;
     }
 
 }

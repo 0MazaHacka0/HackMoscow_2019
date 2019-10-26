@@ -25,7 +25,9 @@
 package com.smarttech.helpme.data.network;
 
 import com.smarttech.helpme.data.network.model.requests.LoginRequest;
+import com.smarttech.helpme.data.network.model.requests.PointRequest;
 import com.smarttech.helpme.data.network.model.requests.RegisterRequest;
+import com.smarttech.helpme.data.network.model.responses.CommonResponse;
 import com.smarttech.helpme.data.network.model.responses.LoginResponse;
 import com.smarttech.helpme.data.network.model.responses.RegisterResponse;
 
@@ -62,5 +64,15 @@ public interface ApiHelper {
      */
     @POST("/api/register")
     Observable<RegisterResponse> register(@Body RegisterRequest registerRequest);
+
+    /**
+     * API send point
+     *
+     * @param pointsRequest points request
+     *
+     * @return points response
+     */
+    @POST("/api/point")
+    Observable<CommonResponse> sendPoint(@Body PointRequest pointsRequest);
 
 }

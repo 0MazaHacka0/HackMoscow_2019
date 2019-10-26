@@ -26,6 +26,10 @@ import com.here.android.mpa.common.PositioningManager;
 import com.here.android.mpa.mapping.AndroidXMapFragment;
 import com.here.android.mpa.mapping.Map;
 import com.smarttech.helpme.R;
+import com.smarttech.helpme.data.network.AppApiHelper;
+import com.smarttech.helpme.data.network.model.Location;
+import com.smarttech.helpme.data.network.model.requests.PointRequest;
+import com.smarttech.helpme.data.network.model.responses.CommonResponse;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -39,6 +43,10 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,15 +74,37 @@ public class MainActivity extends AppCompatActivity {
                     // set the center only when the app is in the foreground
                     // to reduce CPU consumption
 //                    if (!paused) {
-                        map.setCenter(position.getCoordinate(),
-                                Map.Animation.NONE);
+                    map.setCenter(position.getCoordinate(),
+                            Map.Animation.NONE);
 
-                        Log.d("Coordinates", String.format("Position: %s, Source: %s, Lat rad: %f, Lng rad: %f",
-                                position.getCoordinate(),
-                                position.getPositionSource(),
-                                position.getLatitudeAccuracy(),
-                                position.getLongitudeAccuracy()
-                                ));
+                    Log.d("Coordinates", String.format("Position: %s, Source: %s, Lat rad: %f, Lng rad: %f",
+                            position.getCoordinate(),
+                            position.getPositionSource(),
+                            position.getLatitudeAccuracy(),
+                            position.getLongitudeAccuracy()
+                    ));
+
+                    AppApiHelper.getRetrofitAdapter().sendPoint(
+                            new PointRequest(1,
+                                    new Location(
+                                            position.getCoordinate().getLatitude(),
+                                            position.getCoordinate().getLongitude(),
+                                            (double) java.lang.Math.min(position.getLatitudeAccuracy(), position.getLongitudeAccuracy())
+                                    )))
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribeOn(Schedulers.io())
+                            .subscribe(new Consumer<CommonResponse>() {
+                                @Override
+                                public void accept(CommonResponse submitResponse) throws Exception {
+                                    int a = 1;
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    // TODO
+                                    int b = 1;
+                                }
+                            });
                 }
 
                 public void onPositionFixChanged(PositioningManager.LocationMethod method,

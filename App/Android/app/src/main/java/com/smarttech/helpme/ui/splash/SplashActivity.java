@@ -65,7 +65,7 @@ public class SplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash);
 
         mAppHardwareHelper = new AppHardwareHelper(getApplicationContext());
-nextActivity();
+        nextActivity();
         checkPermissions();
     }
 

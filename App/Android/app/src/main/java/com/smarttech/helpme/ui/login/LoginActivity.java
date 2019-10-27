@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 
 import com.smarttech.helpme.R;
+import com.smarttech.helpme.ui.base.BaseActivity;
 import com.smarttech.helpme.ui.main.MainActivity;
 
 public class LoginActivity extends AppCompatActivity {

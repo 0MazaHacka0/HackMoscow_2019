@@ -25,7 +25,14 @@
 package com.smarttech.helpme.ui.base;
 
 
+import android.view.View;
+import android.widget.FrameLayout;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.smarttech.helpme.R;
 
 /**
  * BaseActivity
@@ -37,6 +44,33 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class BaseActivity extends AppCompatActivity {
 
+    /**
+     * Add layered navigation
+     *
+     * @param layoutResID layout res id
+     */
+    @Override
+    public void setContentView(int layoutResID) {
 
+        DrawerLayout fullView = (DrawerLayout) getLayoutInflater().inflate(R.layout.activity_base, null);
+        FrameLayout activityContainer = (FrameLayout) fullView.findViewById(R.id.activity_content);
+
+        getLayoutInflater().inflate(layoutResID, activityContainer, true);
+
+        super.setContentView(fullView);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (useToolbar()) {
+            setSupportActionBar(toolbar);
+            setTitle("Activity Title");
+        } else {
+            toolbar.setVisibility(View.GONE);
+        }
+    }
+
+    protected boolean useToolbar()
+    {
+        return true;
+    }
 
 }

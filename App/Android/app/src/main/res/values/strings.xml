@@ -1,5 +1,11 @@
 <resources>
+
+    <!-- Application -->
     <string name="app_name">HelpMe</string>
+
+    <!-- Activities -->
+    <string name="activity_base_title">Base Activity</string>
+
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_main">MainActivity</string>
@@ -23,5 +29,6 @@
     <string name="login_screen_password">Password</string>
     <string name="login_screen_login_button">Sign in</string>
     <string name="login_screen_sign_up_text">Don\'t have account yet? Sign up</string>
+    <string name="title_activity_map">MapActivity</string>
 
 </resources>

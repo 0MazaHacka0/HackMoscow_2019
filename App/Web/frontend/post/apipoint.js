@@ -1,4 +1,4 @@
-module.exports.func = async (req, res) => {
+module.exports.func = async (con, req, res) => {
 	console.log(req.body);
 
 	if (!req.body) {
@@ -6,13 +6,7 @@ module.exports.func = async (req, res) => {
 		return;
 	}
 
-	let wait = await con.userLib.promise(con, con.queryValue, 'SELECT id FROM points WHERE lat = ? AND lng = ?', [req.body.location.latitude, req.body.location.longitude]);
-	if (wait.res) {
-		res.json({error: "HasPoint"});
-		return;
-	}
-
-	con.query('INSERT INTO points (uID, lat, lng, radius) VALUES (?, ?, ?, ?)', [req.body.uID, req.body.location.latitude, req.body.location.longitude, req.body.radius], (err) => {if (err) throw err; res.json({status: "OK"});});
+	con.query('INSERT INTO points (uID, lat, lng, radius) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE time = time + 1', [req.body.uid, req.body.location.lat, req.body.location.lng, req.body.location.radius], (err) => {if (err) throw err; res.json({status: "OK"});});
 
 	// res.json({status: "OK"});
 };

@@ -53,4 +53,4 @@ posts.filter(el => el.endsWith(".js")).forEach(file => {
 app.use((req, res) => {res.status(404).send('400 <a href="/">back</a>')})
 .use((error, req, res, next) => {console.warn(error); res.status(500).send('500 <a href="/">back</a>');})
 
-http.listen(100, () => console.log('Work on port :100'));
+http.listen(80, () => console.log('Work on port :80'));

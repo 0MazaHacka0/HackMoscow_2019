@@ -264,11 +264,13 @@ $('#clearMap').on('click', function() {
 
 var socket = io();
 
+var reader = new FileReader();
+reader.onload = function(){
+  socket.emit('sendCsv', reader.result);
+  alert('Send!');
+};
+
 let openCsv = function(e){
-  var reader = new FileReader();
-  reader.onload = function(){
-    socket.emit('sendCsv', reader.result);
-  };
   reader.readAsText(e.target.files[0]);
 };
 
@@ -298,5 +300,5 @@ socket.on('recData', (data) => {
 
   calculateRouteFromAtoB( Ma.Map.getObjects().filter(el => el.Ob.src.B).map(el => el.getCenter()) );
 
-  // M.Map.setViewBounds(M.PlacesGroup.getBounds());
+  M.Map.setViewBounds(M.PlacesGroup.getBounds());
 });
